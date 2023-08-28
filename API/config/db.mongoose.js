@@ -1,6 +1,6 @@
 'use strict';
 const mongoose = require('mongoose');
-const dbURL = process.env.dbURL;
+const dbURL = process.env.db;
 
 mongoose.connect(dbURL, {
     useNewUrlParser: true,
