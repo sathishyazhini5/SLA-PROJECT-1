@@ -87,8 +87,21 @@ const getdetails = async(req,res)=>
 //update password
 const updatebymail = async(req,res)=>
 {
-    const update = await service.update(req.body)
-    res.send("Update successfully")
+       const salt = await bcrypt.genSalt(10)
+        const hashpassword = await bcrypt.hash(req.body.password,salt)
+        req.body.password = hashpassword
+
+          const update = await service.update(req.body)
+          res.send({
+            code : 200,
+            message : "Update successfully"
+          })
+}
+//updateall
+const updatemany = async(req,res)=>
+{
+    const update = await service.updateall(req.body)
+    res.send(update)
 }
 
 module.exports=
@@ -96,5 +109,6 @@ module.exports=
     save,
     updatebymail,
     login,
-    getdetails
+    getdetails,
+    updatemany
 }

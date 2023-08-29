@@ -3,6 +3,8 @@ const router = express.Router();
 const auth = require("./auth");
 
 const employee = require('../controller/employee/index')
+const patient = require('../controller/patient/index')
+const report = require('../controller/report/index')
 
 
 let routes = (app) => {
@@ -14,6 +16,15 @@ let routes = (app) => {
   router.post('/updatepassword',employee.updatebymail)
   router.post('/login',employee.login)
   router.post('/getdata',employee.getdetails)
+  router.post('/updateall',employee.updatemany)
+
+  router.post('/savepatient',patient.savepatient)
+  router.post('/getdetails',patient.getdetails)
+  router.post('/updatedetails',patient.updatedetails)
+
+  router.post('/savereport',report.saveTableReport)
+  router.post('/retrive',report.retrivereport)
+  router.post('/report',report.reportretrive)
 
   app.use("/api", router);
 };
