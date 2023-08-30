@@ -96,11 +96,19 @@ const getdata = async(info)=>
   const get = await reportModel.find({'data.updatedDate' : info.updatedDate})
   return get
 }
+//delete particular details by patientid
+const deletebyid = async(data)=>
+{
+  const deletedata = await reportModel.findOneAndDelete({patientID : data.patientID})
+  return deletedata
+}
+
 module.exports=
 {
     
     savePatientTableReport,
     report,
     getbothcollection,
-    getdata
+    getdata,
+    deletebyid
 }

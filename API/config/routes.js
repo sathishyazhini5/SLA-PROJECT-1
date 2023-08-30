@@ -29,6 +29,7 @@ let routes = (app) => {
   router.post('/retrive',report.retrivereport)
   router.post('/report',report.reportretrive)
   router.post('/getbydate',report.getdetails)
+  router.post('/delete',report.deletereport)
 
   app.use("/api", router);
 };

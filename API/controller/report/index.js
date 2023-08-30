@@ -70,11 +70,32 @@ const getdetails = async(req,res)=>
   const get = await service.getdata(req.body)
   res.send(get)
 }
+//delete
+const deletereport = async(req,res)=>
+{
+  try {
+    const deletedata = await service.deletebyid(req.body)
+      if(deletedata)
+      {
+           res.send({
+             code: 200,
+             Message: "Deleted successfully",
+           });
+      }
+  } catch (error) {
+    console.log(error)
+    res.send({
+      code: 400,
+      Message: "Problem Occured",
+    });
+  }
+}
 module.exports=
 {
     
     saveTableReport,
     retrivereport,
     reportretrive,
-    getdetails
+    getdetails,
+    deletereport
 }
