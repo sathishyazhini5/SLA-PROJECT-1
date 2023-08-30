@@ -11,9 +11,9 @@ const patientModel = require('../../model/patientschema')
 }*/
  const savePatientTableReport = async (info) => {
     try {
-
+     
       const patientCheck = await reportModel.aggregate([{$match:{patientID:info.patientID}}])
-
+      
       if (patientCheck.length==0) {
 
         const report = new reportModel(info);
@@ -90,11 +90,17 @@ const getbothcollection = async (data) => {
     
   }
 }
-
+//get details
+const getdata = async(info)=>
+{
+  const get = await reportModel.find({'data.updatedDate' : info.updatedDate})
+  return get
+}
 module.exports=
 {
     
     savePatientTableReport,
     report,
-    getbothcollection
+    getbothcollection,
+    getdata
 }

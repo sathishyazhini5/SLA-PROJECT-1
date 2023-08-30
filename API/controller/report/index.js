@@ -64,10 +64,17 @@ const reportretrive = async(req,res)=>
     const retrive = await service.getbothcollection(req.body.patientID)
     res.send(retrive)
 }
+
+const getdetails = async(req,res)=>
+{
+  const get = await service.getdata(req.body)
+  res.send(get)
+}
 module.exports=
 {
     
     saveTableReport,
     retrivereport,
-    reportretrive
+    reportretrive,
+    getdetails
 }

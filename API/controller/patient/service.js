@@ -1,5 +1,6 @@
 const patientModel = require('../../model/patientschema')
 
+
 //save patient details with unique patientid
 const save = async(data)=>
 {
@@ -31,10 +32,29 @@ const updateall = async(data)=>
         }},{multi : true})
         return update
 }
+const saveFileList = async(data)=>{
+    try {
+
+     console.log(data)
+
+     
+   const patientFileListUpdate = await patientModel.findOneAndUpdate({patientID:data.patientID},
+     {$set: {file:{name:data.name,url:data.url}}},{new:false,upsert:true,multi:true});
+
+
+       return true;
+      
+    } catch (error) {
+
+     console.log(error)
+      
+    }
+  }
 
 module.exports=
 {
     save,
     getdata,
-    updateall
+    updateall,
+    saveFileList
 }

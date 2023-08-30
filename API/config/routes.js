@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("./auth");
+const multer = require('multer')
 
 const employee = require('../controller/employee/index')
 const patient = require('../controller/patient/index')
@@ -21,10 +22,13 @@ let routes = (app) => {
   router.post('/savepatient',patient.savepatient)
   router.post('/getdetails',patient.getdetails)
   router.post('/updatedetails',patient.updatedetails)
+  router.post("/uploadFiles", patient.uploadPatientFile)
+  
 
   router.post('/savereport',report.saveTableReport)
   router.post('/retrive',report.retrivereport)
   router.post('/report',report.reportretrive)
+  router.post('/getbydate',report.getdetails)
 
   app.use("/api", router);
 };

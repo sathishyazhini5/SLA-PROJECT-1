@@ -1,4 +1,5 @@
 const service = require('./service')
+const multerfile = require('../../middleware/multer')
 
 //save patient details
 const savepatient = async(req,res)=>
@@ -41,10 +42,44 @@ const updatedetails = async(req,res)=>
     const update = await service.updateall(req.body)
     res.send(update)
 }
+//update file
+let uploadPatientFile = async(req, res)=>{
+    try {
+  
+      let tempName = await multerfile.uploadMiddleware(req, res);
+  
+     console.log(req.file.originalname)
+  
+      if (req.file == undefined) {
+        return res.status(400).send("Please upload a file!");
+      } else {
+  
+        let name = req.file.originalname;
+        let url = req.file.path;
+        let patientID = req.body.patientID;
+  
+        let getFilesList = await service.saveFileList({name, url, patientID});
+  
+        if (getFilesList){
+  
+          res.status(200).send({
+          message: "Uploaded the file successfully: " + req.file.originalname,
+        });
+  
+        }
+  
+      }
+    }
+catch(error)
+{
+    console.log(error)
+}
+}
 module.exports=
 {
     savepatient,
     getdetails,
-    updatedetails
+    updatedetails,
+    uploadPatientFile
 }
 
